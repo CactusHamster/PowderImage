@@ -116,7 +116,9 @@ function generateScript(deco, elems, useFill, useAlpha, fillBlack) {
 				//Change TRON to lime green-ish
 				else if (c == 143) script.push(`a = sim.partCreate(-3, ${x}, ${offsettedY}, ${c})\nsim.partProperty(a, sim.FIELD_TMP, 12000)`)
 				//Change SPRK to have a ctype of TUNG
-				else if (c == 15) script.push(`a = sim.partCreate(-3, ${x}, ${offsettedY}, 171)\nsim.partProperty(a, sim.FIELD_CTYPE, 171)\nsim.partProperty(a, sim.FIELD_LIFE, 10)\nsim.partProperty(a, sim.FIELD_TYPE, 15)`)
+				else if (c == 15) script.push(`a = sim.partCreate(-3, ${x}, ${offsettedY}, ${c})\nsim.partProperty(a, sim.FIELD_CTYPE, 171)\nsim.partProperty(a, sim.FIELD_LIFE, 10)\nsim.partProperty(a, sim.FIELD_TYPE, 15)`)
+				//Set tmp2 of qrtz to 4
+				else if (c == 132 || c == 133)  script.push(`a = sim.partCreate(-3, ${x}, ${offsettedY}, ${c})\nsim.partProperty(a, sim.FIELD_CTYPE, 171)\nsim.partProperty(a, sim.FIELD_LIFE, 10)\nsim.partProperty(a, sim.FIELD_TMP2, 4)`)
 				else script.push(`sim.partCreate(-3, ${x}, ${offsettedY}, ${c})`)
 				
 				if (deco/* && (c != 54)*/) {
