@@ -1,0 +1,15 @@
+<p>
+Testing
+</p>
+
+<script src="https://raw.githubusercontent.com/gpujs/gpu.js/master/dist/gpu-browser.min.js"></script>
+<script defer>
+  try {
+    const gpu = new gpu();
+    document.getElementsByTagName('p')[0].innerHTML = 'Success'
+  } catch (e) {
+    console.info(e)
+    document.getElementsByTagName('p')[0].innerHTML = 'Failure'
+  }
+
+</script>

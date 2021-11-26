@@ -1,0 +1,157 @@
+* {
+	margin:0;
+	padding:0;
+} /* to remove the top and left whitespace */
+
+:root {
+  --slider-color: #1f1fff;;
+}
+
+
+
+div {
+	margin:0; padding:0;
+}
+
+.controls {
+	overflow: auto;
+	width: 30%;
+	/*display: inline-block;*/
+	background: gray;
+	float:left;
+	height: 100%;
+	
+}
+.noDispButton {
+	background: none;
+	border: none;
+	margin-left:5px; margin-right:5px;
+	padding: 3px
+}
+
+
+
+
+
+
+
+.slider {
+  -webkit-appearance: none;
+  width: 70%;
+  height: 15px;
+  border-radius: 5px;  
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 2%; 
+  background: #1f1fff;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  border-radius: 2%;
+  background: var(--slider-color);
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.noSelect {
+	user-select: none; /* supported by Chrome and Opera */
+   -webkit-user-select: none; /* Safari */
+   -khtml-user-select: none; /* Konqueror HTML */
+   -moz-user-select: none; /* Firefox */
+   -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+
+/* toggle in label designing */
+.toggle {
+	text-align:center;
+	top:7px;
+	position : relative;
+	display : inline-block;
+	width : 120px;
+	height : 20px;
+	background-color: #e5e3ff;  /*The background of the blue side*/
+	border-radius: 3%;
+	border: 2px solid #aba07e;
+}
+		
+/* After slide changes */
+.toggle:after {
+	content: '';
+	position: absolute;
+	width: 60px;
+	height: 18px;
+	border-radius: 3%;
+	background-color: #aba07e;
+	top: 1px; 
+	left: 1px;
+	transition:  all 0.5s;
+}
+		
+/* Toggle text */
+.switchtxt {
+	position: absolute;
+	/*top: -15px;*/
+	text-align:center;
+}
+		
+/* Checkbox checked effect */
+.checkbox:checked + .toggle::after {
+	left : 59px; 
+}
+		
+/* Checkbox checked toggle label bg color */
+.checkbox:checked + .toggle {
+	background-color: #e8ffe6; /*The background of the green side*/
+}
+		
+/* Checkbox vanished */
+.checkbox { 
+	display : none;
+}
+
+
+.fileControlButton {
+	/*display: inline-block;*/
+	border: none;
+	background: #e9e9ed;
+	padding: 0.2em;
+	margin-left: 4px;
+}
+.fileControlButton:hover {
+	background: #c1c1c7;
+}
+
+
+
+
+
+
+
+
+.ctrlLabel {
+	background: #e9e9ed;
+}
