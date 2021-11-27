@@ -43,6 +43,11 @@
 			<br>
 			<br>
 			
+			<label style="margin-left: 4px" class="container">Run on script start
+				<input type="checkbox" onclick="this.checked ? functionnameInput.placeholder = 'function name (does not apply)' : functionnameInput.placeholder = 'Enter a function name (to draw the image | default is `image`)'" id="runOnStart">
+				<span class="checkmark"></span>
+			</label>
+			
 			<label style="margin-left: 4px" class="container">Fill in blank spaces
 				<input type="checkbox" id='usewarp'>
 				<span class="checkmark"></span>
@@ -53,10 +58,23 @@
 				<span class="checkmark"></span>
 			</label>
 			
-			<label style="margin-left: 4px" class="container">Use Alpha transparency for deco
+			<label style="margin-left: 4px" class="container">Add Alpha transparency values to deco
 				<input type="checkbox" id="usealpha" checked="checked">
 				<span class="checkmark"></span>
 			</label>
+			
+			<label style="margin-left: 4px" class="container">Use Alpha transparency filter for elements
+				<input type="checkbox" id="usealphaE" checked="checked">
+				<span class="checkmark"></span>
+			</label>
+			
+			<div style="display:flex" title="only if above checkbox is checked">
+			<input id="lblAplSlid" type="button" class="ctrlLabel noDispButton" value="Element Alpha Limit (255)" title="only if above checkbox is checked"></input>
+			<input style="margin-left: 5px" class="slider" type="range" min="0" max="255" id="alphaElimit" title="only if above checkbox is checked" value="255">
+			</div>
+			
+			<br>
+			<br>
 			
 			<label>
 				<input id="filenameInput" style="margin-left: 4px; width:98%" placeholder="Enter a filename here"></input>
@@ -68,7 +86,7 @@
 			<br>
 			<br>
 			<br>
-			<input type="button" style="width:98%" class="fileControlButton" value="Create Script" onclick="generateScript(!!DecoSwitch.checked, !!PowderSwitch.checked, !!usewarp.checked, !!usealpha.checked, !!useblack.checked)">
+			<input type="button" style="width:98%" class="fileControlButton" value="Create Script" onclick="generateScript(!!DecoSwitch.checked, !!PowderSwitch.checked, !!usewarp.checked, !!usealpha.checked, !!useblack.checked, !!usealphaE.checked, alphaElimit.value, !!runOnStart.checked)">
 			<br>
 			<br>
 			<br>
@@ -92,4 +110,9 @@
 	<script src='./gpu-browser.min.js'></script>
 	<script src="index.js"></script>
 	<script src="scripter.js"></script>
+	<script>
+		alphaElimit.addEventListener('change', function (e) {lblAplSlid.value = `Element Alpha Limit (${e.target.value})`})
+		alphaElimit.addEventListener('input', function (e) {lblAplSlid.value = `Element Alpha Limit (${e.target.value})`})
+		alphaElimit.addEventListener('load', function (e) {e.target.value = 255; lblAplSlid.value = `Element Alpha Limit (${e.target.value})`})
+	</script>
 </body>

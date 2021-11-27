@@ -59,7 +59,7 @@ const getColors = gpu.createKernel(function(img, xoffset, yoffset) {
 	})
 
 
-function generateScript(deco, elems, useFill, useAlpha, fillBlack) {
+function generateScript(deco, elems, useFill, useAlpha, fillBlack, useAlphaE, EAlphaLimit, runOnStart) {
 	if (!ctxImage.src) return alert('You need to add an image!');
 	let defaultElem = 67
 	ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -77,7 +77,9 @@ function generateScript(deco, elems, useFill, useAlpha, fillBlack) {
 		//let script = ['']
 		let functionName = functionnameInput.value.toString().trim()
 		if (functionName == '') functionName = 'image'
-		let script = [`--print("Use ${functionName}() to draw your image!")`, `function ${functionName} ()`, `local a = 0`];
+		let script;
+		if (!runOnStart) script = ['--Made with PowderImage','--https://cactushamster.github.io/PowderImage',`--print("Use ${functionName}() to draw your image!")`, `function ${functionName} ()`, `local a = 0`];
+		else script = ['--Made with PowderImage','--https://cactushamster.github.io/PowderImage',`local a = 0`]
 
 		let xf = Math.floor( ( (canvas.width / 2) ) - ( (simSize.w / 2) ) + 4 )
 		let yf = Math.floor( ( (canvas.height / 2) ) - ( (simSize.h / 2) ) + 4 )
@@ -92,6 +94,7 @@ function generateScript(deco, elems, useFill, useAlpha, fillBlack) {
 				let cc = c
 				if (!useFill && c[0] + c[1] + c[2] + c[3] == 0) continue;
 				if (!fillBlack && c[3] == 255 && c[0] + c[1] + c[2] == 0) continue;
+				if (useAlphaE && c[3] < 255-+EAlphaLimit) continue;
 				
 				let offsettedY = -y + (simSize.h - 4)
 				if (elems) {
@@ -135,7 +138,7 @@ function generateScript(deco, elems, useFill, useAlpha, fillBlack) {
 			}
 			script.push(`-- y = ${y}`)
 		}
-		script.push('end')
+		if (!runOnStart) script.push('end')
 		let title = filenameInput.value.toString().trim()
 		if (title == '.lua') title = ((imageInput.files[0] ?? {}).name ?? 'img')
 		if (!title.endsWith('.lua')) title = title + '.lua'
